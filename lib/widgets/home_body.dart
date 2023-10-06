@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'card_items.dart';
 import 'custom_appBar.dart';
 
 class HomeBody extends StatelessWidget {
@@ -11,10 +11,13 @@ class HomeBody extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child:  Column(
         children: [
-          CustomAppBar()
+          CustomAppBar(),
+          CardItem()
         ],
       ),
     );
   }
 }
+
+
 
