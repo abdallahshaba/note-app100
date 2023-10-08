@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'card_items.dart';
 import 'custom_appBar.dart';
+import 'list_view.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -12,12 +13,13 @@ class HomeBody extends StatelessWidget {
       child:  Column(
         children: [
           CustomAppBar(),
-          CardItem()
+          Expanded(child: NoteListView())
         ],
       ),
     );
   }
 }
+
 
 
 
