@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'card_items.dart';
 import 'custom_appBar.dart';
 import 'list_view.dart';
 
