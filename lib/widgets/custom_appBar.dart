@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:note_app100/widgets/serach_icon.dart';
-
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
-
+  const CustomAppBar({super.key, required this.text, required this.icon});
+  final String text ;
+  final IconData icon ;
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        SizedBox(height: 100,),
-        Text("Notes" , style: TextStyle(
-          fontSize: 32 , color: Colors.white , 
-          fontWeight: FontWeight.bold
+        Text(text , style: TextStyle(
+          fontSize: 32 , fontWeight: FontWeight.bold
         ),),
         Spacer(),
-        SearchIcon(),
+      Container(
+      height: 48,
+      width: 48,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: Colors.white.withOpacity(0.05)),
+        child: IconButton(
+          onPressed: (){}, icon: Icon(icon)
+          )
+    )
       ],
     );
   }
 }
-
