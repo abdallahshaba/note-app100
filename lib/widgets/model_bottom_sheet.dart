@@ -35,7 +35,7 @@ class _NoteFormState extends State<NoteForm> {
       key: globalKey,
       child:  Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           CustomTextField(
