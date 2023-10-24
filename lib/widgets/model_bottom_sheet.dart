@@ -1,72 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:note_app100/widgets/custom_button.dart';
-import 'package:note_app100/widgets/custom_text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:note_app100/cubit/add_note/add_note.dart';
+import 'package:note_app100/widgets/note_form.dart';
 
 class ModelBottomSheet extends StatelessWidget {
   const ModelBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16),
+    return  Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: SingleChildScrollView(
-        child: NoteForm(),
-      ),
-    );
-  }
-}
-
-class NoteForm extends StatefulWidget {
-  const NoteForm({
-    super.key,
-  });
-
-  @override
-  State<NoteForm> createState() => _NoteFormState();
-}
-
-class _NoteFormState extends State<NoteForm> {
-  final GlobalKey<FormState> globalKey = GlobalKey();
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled ;
-  String? title , subtitle ;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: globalKey,
-      child:  Column(
-        children: [
-          const SizedBox(
-            height: 32,
-          ),
-          CustomTextField(
-            onSaved: (value) {
-              title = value ;
-            },
-            hintText: 'Title',
-          ),
-          const SizedBox(height: 16,),
-          CustomTextField(
-            onSaved: (value) {
-              subtitle = value ;
-            },
-            hintText: 'Content' ,
-            maxLines: 4,
-            ),
-           const SizedBox(height: 50,),
-            CustomButton(
-            onTap: () {
-              if(globalKey.currentState!.validate()){
-                globalKey.currentState!.save();
-              }
-              else{
-                autovalidateMode = AutovalidateMode.always ;
-                setState(() {
-                });
-              }
-            },
-           ),
-           const SizedBox(height: 16,),
-        ],
+        child: BlocConsumer<NotesCubit, NotesState>(
+          listener: (context, state) {
+            if(state is NotesFailure){
+              print('Failed ${state.errerMessage}');
+            }
+            if(state is NotesSuccess){
+              Navigator.pop(context);
+            }
+          },
+          builder: (context, state) {
+            return ModalProgressHUD(
+              inAsyncCall: state is NotesLoading? true : false ,
+              child: const NoteForm());
+          },
+        ),
       ),
     );
   }
