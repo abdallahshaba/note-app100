@@ -10,7 +10,6 @@ class MyBlocObserver extends BlocObserver {
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    // TODO: implement onError
     super.onError(bloc, error, stackTrace);
   }
 
@@ -26,4 +25,16 @@ class MyBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
     // TODO: implement onChange
   }
+
+  @override 
+  void onCreate (BlocBase bloc){
+    super.onCreate(bloc);
+    debugPrint('create = $bloc');
+  } 
+
+  @override 
+  void onClose (BlocBase bloc){
+    super.onClose(bloc);
+    debugPrint('close = $bloc');
+  } 
 }
