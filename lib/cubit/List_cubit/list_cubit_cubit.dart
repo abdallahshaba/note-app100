@@ -7,16 +7,12 @@ import '../../constans.dart';
 
 part 'list_cubit_state.dart';
 
-class ListCubit extends Cubit<ListCubitState> {
+class ListCubit extends Cubit<ListState> {
   ListCubit() : super(ListCubitInitial());
+  List<NoteModel22>? nottt ;
+  fectAllNotes(){
 
-  fectAllNotes() async {
-  try {
   var noteBox = Hive.box<NoteModel22>(kNoteBox);
-  List<NoteModel22> notes = noteBox.values.toList();
-  emit(ListCubitSuccess(notes));
- }  catch (e) {
-  emit(ListCubitFailure(e.toString()));
- }
+  nottt = noteBox.values.toList();
   }
   }
